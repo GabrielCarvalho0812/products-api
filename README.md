@@ -1,4 +1,5 @@
 API de Produtos com Spring
-- Spring boot
+
 - Spring web mvc
-- Spring validationn
+- Spring data JPA
+- Spring validation
