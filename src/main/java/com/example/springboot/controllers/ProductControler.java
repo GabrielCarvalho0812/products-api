@@ -25,7 +25,7 @@ public class ProductControler {
     ProductRepository productRepository;
 
 
-    //MÉTODO PARA RECEBER OS ATRIBUTOS PARA SEREM SALVOS NO BANCO
+   
     @PostMapping("/products")
     public ResponseEntity<ProductsModel> saveProduct(@RequestBody @Valid ProductRecordDto productRecordDto){
         var productsModel = new ProductsModel();
@@ -33,30 +33,28 @@ public class ProductControler {
         return ResponseEntity.status(HttpStatus.CREATED).body(productRepository.save(productsModel));
     }
 
-    //MÉTODO PARA RETORNAR DADOS DO BANCO
     @GetMapping("/products")
     public ResponseEntity<List<ProductsModel>> getallProducts(){
         return  ResponseEntity.status(HttpStatus.OK).body(productRepository.findAll());
     }
 
-    //MÉTODO PARA RETORNAR DADOS DO BANCO POR ID
+  
     @GetMapping("/products/{id}")
     public ResponseEntity<Object> getOneProduct(@PathVariable(value = "id") UUID id){
         Optional<ProductsModel> product0 = productRepository.findById(id);
 
-        if (product0.isEmpty()){ //is.isEmpty (for vazio)
+        if (product0.isEmpty()){ 
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("product not found.");
         }
         return ResponseEntity.status(HttpStatus.OK).body(product0.get());
     }
 
-    //MÉTODO PARA ATUALIZAR
     @PutMapping("/products/{id}")
     public ResponseEntity<Object> updateProduct(@PathVariable(value = "id") UUID id,
                                                 @RequestBody @Valid ProductRecordDto productRecordDto){
         Optional<ProductsModel> product0 = productRepository.findById(id);
 
-        if (product0.isEmpty()){ // (product.isEmpti for vazio...)
+        if (product0.isEmpty()){ 
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
         }
         var productModel = product0.get();
@@ -64,7 +62,7 @@ public class ProductControler {
         return ResponseEntity.status(HttpStatus.OK).body(productRepository.save(productModel));
     }
 
-    //MÉTODO PARA DELETAR
+
     @DeleteMapping("/products/{id}")
     public ResponseEntity<Object> deleteProduct(@PathVariable (value = "id") UUID id){
         Optional<ProductsModel> produtc0 = productRepository.findById(id);
